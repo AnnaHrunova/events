@@ -69,10 +69,15 @@ public class AnomalyDetectionService {
                 respEx.printStackTrace();
             }
         } catch (IOException ex) {
-            System.err.println("Exception on Anomaly Detector: " + ex.getMessage());
             ex.printStackTrace();
         }
         return true;
+    }
+
+    BigDecimal score(long canceled, long all) {
+        return new BigDecimal(canceled).setScale(5, RoundingMode.HALF_UP)
+                .divide(new BigDecimal(all).setScale(5, RoundingMode.HALF_UP), RoundingMode.HALF_UP)
+                .setScale(5, RoundingMode.HALF_UP);
     }
 
     private List<Series> createTimeSeries(BigDecimal clientRate) {
@@ -94,19 +99,26 @@ public class AnomalyDetectionService {
         long allClientEntries = entryRepository.countByClientFacebookId(clientId).size();
         long cancelledEntries = entryRepository.countByClientFacebookIdAndStatus(clientId, EntryStatus.CANCELED.name()).size();
 
-        if (allClientEntries == 0 || cancelledEntries == 0) {
+        //new clients arent's scored
+        if (allClientEntries > 10 && cancelledEntries > 0) {
             return BigDecimal.ZERO;
         }
 
-        return new BigDecimal(cancelledEntries)
-                .divide(new BigDecimal(allClientEntries), RoundingMode.HALF_UP)
+        return new BigDecimal(cancelledEntries).setScale(5, RoundingMode.HALF_UP)
+                .divide(new BigDecimal(allClientEntries).setScale(5, RoundingMode.HALF_UP), RoundingMode.HALF_UP)
                 .setScale(5, RoundingMode.HALF_UP);
     }
 
+    //Demo data for testing purposes
     private List<SeriesItem> generateTestData() {
         List<SeriesItem> result = new ArrayList<>();
-        for (int i = 1; i < 15; i++) {
-            BigDecimal value = new BigDecimal(new Random().nextDouble()).setScale(5, RoundingMode.HALF_UP);
+        long baseCanceled = 1500;
+        long baseAll = 10000;
+        for (int i = 1; i < 20; i++) {
+            baseCanceled = baseCanceled - (long) (Math.random() * (20));
+            baseAll = baseAll - (long) (Math.random() * (100));
+
+            BigDecimal value = score(baseCanceled, baseAll);
             result.add(new SeriesItem(UUID.randomUUID().toString(), LocalDateTime.now().minusDays(i), value));
         }
         return result;

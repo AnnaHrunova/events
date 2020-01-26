@@ -131,11 +131,11 @@
 					<appSettings>
 						<property>
 							<name>COSMOSDB_URI</name>
-							<value>https://eventmanagerdb.documents.azure.com:443/</value>
+							<value>@Microsoft.KeyVault(SecretUri=https://mono-key-vault.vault.azure.net/secrets/COSMOSDB-URL/f81399fb41ce451a9075475bb28883f3)</value>
 						</property>
 						<property>
 							<name>COSMOSDB_KEY</name>
-							<value></value>
+							<value>@Microsoft.KeyVault(SecretUri=https://mono-key-vault.vault.azure.net/secrets/COSMOSDB-KEY/a2256e9f4f9b46d882b2b8c8a997c531)</value>
 						</property>
 						<property>
 							<name>COSMOSDB_DBNAME</name>

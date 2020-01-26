@@ -21,14 +21,14 @@ public class DataCollectionScheduler {
 
     private final SeriesRepository seriesRepository;
 
+    private final AnomalyDetectionService anomalyDetectionService;
+
     @Scheduled(cron = "59 59 23 * * *")
     public void collectAnomalies() {
         long cancelledItems = entryRepository.countByStatusIn(EntryStatus.CANCELED.name()).size();
         long allItems = entryRepository.count();
 
-        BigDecimal rate = new BigDecimal(cancelledItems)
-                .divide(new BigDecimal(allItems), RoundingMode.HALF_UP)
-                .setScale(5, RoundingMode.HALF_UP);
+        BigDecimal rate = anomalyDetectionService.score(cancelledItems, allItems);
         SeriesItem latestSeries = new SeriesItem(UUID.randomUUID().toString(), LocalDateTime.now(), rate);
         seriesRepository.save(latestSeries);
     }

@@ -57,9 +57,11 @@ public class EventController {
             }
             return ResponseEntity.ok(events);
         } catch (InvalidAccessTokenException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No Access To This Resource. Please login!");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }
@@ -74,9 +76,11 @@ public class EventController {
             val events = eventItemRepository.findAllByOwnerFacebookId(result.getUserId());
             return ResponseEntity.ok(events);
         } catch (InvalidAccessTokenException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No Access To This Resource. Please login!");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }
@@ -101,9 +105,11 @@ public class EventController {
             return ResponseEntity.ok("Event created successfully");
 
         } catch (InvalidAccessTokenException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No Access To This Resource. Please login!");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }
@@ -119,6 +125,7 @@ public class EventController {
 
             return ResponseEntity.ok("Event updated");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }

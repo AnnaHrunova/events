@@ -45,9 +45,11 @@ public class EntryController {
             val entryItem = entryRepository.findAllByClientFacebookId(result.getUserId());
             return ResponseEntity.ok(entryItem);
         } catch (InvalidAccessTokenException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No Access To This Resource. Please login!");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }
@@ -61,6 +63,7 @@ public class EntryController {
             val allByEventCode = entryRepository.findAllByEventCode(eventCode);
             return ResponseEntity.ok(allByEventCode);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }
@@ -92,6 +95,7 @@ public class EntryController {
                         .body("Reservation denied, because you are a bad client!");
             }
         } catch (InvalidAccessTokenException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.FORBIDDEN)
                     .body("No Access To This Resource. Please login!");
         } catch (Exception e) {
@@ -112,6 +116,7 @@ public class EntryController {
             entryRepository.save(entryItem);
             return ResponseEntity.ok("Entry accepted!");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Incorrect request!");
         }
@@ -128,7 +133,9 @@ public class EntryController {
             entryRepository.save(entryItem);
             return ResponseEntity.ok("Entry cancelled!");
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Incorrect request!");        }
+                    .body("Incorrect request!");
+        }
     }
 }
