@@ -23,7 +23,7 @@ public class DataCollectionScheduler {
 
     private final AnomalyDetectionService anomalyDetectionService;
 
-    @Scheduled(cron = "59 10 0 * * *")
+    @Scheduled(cron = "59 59 23 * * *")
     public void collectAnomalies() {
         long cancelledItems = entryRepository.countByStatus(EntryStatus.CANCELED.name()).size();
         long allItems = entryRepository.count();
