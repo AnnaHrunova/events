@@ -1,7 +1,7 @@
 # events
 
 Run locally: 
-mvn package spring-boot:run
+mvn package spring-boot:run (use java 8)
 
 
 Deploy to Azure: 
