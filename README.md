@@ -8,8 +8,10 @@ Deploy to Azure:
 mvn azure-webapp:deploy
 
 Facebook users for testing authentication:
+
+
 1.
-	name: John Doe	
+  name: John Doe	
   user_id: 102397561321973	
   email: john_pvlplih_doe@tfbnw.net
   password: azure123
