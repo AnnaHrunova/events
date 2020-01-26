@@ -37,7 +37,7 @@ angular.module('eventManagerApp')
         };
 
         $scope.updateDescription = function (event) {
-            eventsSvc.updateEvent($scope.editEvent)
+            eventsSvc.updateDescription($scope.editEvent)
             .success(function (results) {
                 $scope.populate();
                 $scope.editSwitch(event);
@@ -54,7 +54,7 @@ angular.module('eventManagerApp')
                 'name': $scope.newEventCaption,
             }).success(function (results) {
                 $scope.newEventCaption = '';
-                $scope.populate();
+                $scope.myPopulate();
                 $scope.loadingMessage = results;
                 $scope.error = '';
             }).error(function (err) {

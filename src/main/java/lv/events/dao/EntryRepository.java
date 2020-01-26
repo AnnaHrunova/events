@@ -26,7 +26,7 @@ public interface EntryRepository extends DocumentDbRepository<EntryItem, String>
 
     List<EntryItem>  countByClientFacebookIdAndStatus(String userId, String status);
 
-    List<EntryItem>  countByStatusIn(String status);
+    List<EntryItem>  countByStatus(String status);
 
     List<EntryItem> findByCode(String code);
 }

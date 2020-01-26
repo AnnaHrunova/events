@@ -116,7 +116,7 @@ public class EventController {
     }
 
     @PutMapping(value = "/api/events", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> updateEvent(@RequestBody EventItem item) {
+    public ResponseEntity<String> updateEventDescription(@RequestBody EventItem item) {
         try {
             val eventItem = eventItemRepository.findById(item.getCode()).get();
             eventItem.setDescription(item.getDescription());

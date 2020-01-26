@@ -9,7 +9,7 @@
             <div class="list-group-item list-group-item-action flex-column align-items-start" data-ng-repeat="item in entriesList">
                 <div data-ng-hide="item.view">
                     <button type="button" class="btn btn-info float-right btn-sm m-1" data-ng-click="viewSwitch(item)">View</button>
-                    <button type="button" class="btn btn-danger float-right btn-sm m-1" ng-disabled="item.status!='RESERVED'" data-ng-click="acceptEntry(item.code)">Accept</button>
+                    <button type="button" class="btn btn-success float-right btn-sm m-1" ng-disabled="item.status!='RESERVED'" data-ng-click="acceptEntry(item.code)">Accept</button>
                     <button type="button" class="btn btn-danger float-right btn-sm m-1" ng-disabled="item.status!='RESERVED'" data-ng-click="cancelEntry(item.code)">Cancel</button>
                     <span>{{item.dayModel}}: {{item.timeFromModel}} - {{item.timeToModel}} {{item.status}}</span>
                 </div>

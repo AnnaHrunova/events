@@ -23,9 +23,9 @@ public class DataCollectionScheduler {
 
     private final AnomalyDetectionService anomalyDetectionService;
 
-    @Scheduled(cron = "59 59 23 * * *")
+    @Scheduled(cron = "59 10 0 * * *")
     public void collectAnomalies() {
-        long cancelledItems = entryRepository.countByStatusIn(EntryStatus.CANCELED.name()).size();
+        long cancelledItems = entryRepository.countByStatus(EntryStatus.CANCELED.name()).size();
         long allItems = entryRepository.count();
 
         BigDecimal rate = anomalyDetectionService.score(cancelledItems, allItems);

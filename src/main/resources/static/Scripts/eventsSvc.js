@@ -11,7 +11,7 @@ angular.module('eventManagerApp')
             addEvent: function (item) {
                 return $http.post('api/events/', item);
             },
-            updateEvent: function (item) {
+            updateDescription: function (item) {
                 return $http.put('api/events/', item);
             },
         };
