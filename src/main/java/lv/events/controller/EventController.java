@@ -45,7 +45,7 @@ public class EventController {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("hh:mm");
 
     @GetMapping(value = "/api/events", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> getAllEvents(@CookieValue(name = "user_name") final String userName,
+    public ResponseEntity<?> getAllEvents(@CookieValue(name = "user_name", defaultValue = "anonymous") final String userName,
                                           @CookieValue(name = "access_token", defaultValue = "anonymous") final String accessToken) {
         try {
             Iterable<EventItem> events;
